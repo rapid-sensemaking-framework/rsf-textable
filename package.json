@@ -1,0 +1,16 @@
+{
+  "name": "textable",
+  "version": "0.0.14",
+  "description": "a module for exposing a very super simple API for sending/receiving texts as an eventemitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "twilio": "^3.30.1"
+  }
+}
