@@ -7,6 +7,9 @@ In order to make this work, not only do you need to set up a twilio account, and
 but you also need to use an NGROK tunnel to your temp server, to receive webhook events.
 This is all explained here: https://www.twilio.com/docs/sms/quickstart/node#sign-up-for-twilio-and-get-a-twilio-phone-number
 
+## Installation
+`npm install --save rsf-textable`
+
 ## environment variables
 
 - `TWILIO_SERVER_PORT`  : `Number`, the port on which to temporarily run the server

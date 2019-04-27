@@ -1,5 +1,5 @@
 {
-  "name": "textable",
+  "name": "rsf-textable",
   "version": "0.0.15",
   "description": "a module for exposing a very super simple API for sending/receiving texts as an eventemitter",
   "main": "index.js",
