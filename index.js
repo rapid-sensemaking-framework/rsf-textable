@@ -15,37 +15,44 @@ module.exports.STANDARD_EVENT_KEY = STANDARD_EVENT_KEY
 const TYPE_KEY = 'phone'
 module.exports.TYPE_KEY = TYPE_KEY
 
-// import environment variables
-const port = process.env.TWILIO_SERVER_PORT
-const senderNumber = process.env.TWILIO_SENDER_NUMBER
-const accountSid = process.env.TWILIO_ACCOUNT_SID
-const authToken = process.env.TWILIO_TOKEN
+let senderNumber
 
-const app = express()
-app.use(bodyParser.urlencoded({ extended: false }))
+// global vars needed within the class as well
+let eventBus, client
 
-// a singleton that will act to transmit events between the webhook listener
-// and the instances of Textable
-const eventBus = new EventEmitter()
+const init = (config) => {
+    const { port, accountSid, authToken } = config
+    
+    const app = express()
+    app.use(bodyParser.urlencoded({ extended: false }))
+    
+    senderNumber = config.senderNumber
 
-// listen for messages
-app.post('/sms', (req, res) => {
-    // send back an empty response
-    res.writeHead(200, { 'Content-Type': 'text/xml' })
-    res.end(new MessagingResponse().toString())
+    // a singleton that will act to transmit events between the webhook listener
+    // and the instances of Textable
+    eventBus = new EventEmitter()
 
-    // use the ID/phone number as the event type, and the
-    // text as the event message
-    // req.body.From is the phone number
-    // req.body.Body is the text
-    eventBus.emit(req.body.From, req.body.Body)
-})
+    // listen for messages
+    app.post('/sms', (req, res) => {
+        // send back an empty response
+        res.writeHead(200, { 'Content-Type': 'text/xml' })
+        res.end(new MessagingResponse().toString())
 
-http.createServer(app).listen(port, () => {
-    console.log('starting http server to listen for text messages on port ' + port)
-})
+        // use the ID/phone number as the event type, and the
+        // text as the event message
+        // req.body.From is the phone number
+        // req.body.Body is the text
+        eventBus.emit(req.body.From, req.body.Body)
+    })
 
-const client = twilio(accountSid, authToken)
+    http.createServer(app).listen(port, () => {
+        console.log('starting http server to listen for text messages on port ' + port)
+    })
+
+    // the service that will be used to make requests to the twilio api
+    client = twilio(accountSid, authToken)
+}
+module.exports.init = init
 
 class Textable extends EventEmitter {
     constructor(id, name) {

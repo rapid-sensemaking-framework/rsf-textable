@@ -10,14 +10,14 @@ This is all explained here: https://www.twilio.com/docs/sms/quickstart/node#sign
 ## Installation
 `npm install --save rsf-textable`
 
-## environment variables
-
-- `TWILIO_SERVER_PORT`  : `Number`, the port on which to temporarily run the server
-- `TWILIO_SENDER_NUMBER`: `String`, the phone number associated with the twilio account, formatted like +12223334444
-- `TWILIO_ACCOUNT_SID`  : `String`, the account sid value taken from twilio
-- `TWILIO_TOKEN`        : `String`, the secret token given by twilio
-
 ## API
+
+__`init(config: TwilioConfig) -> result: null`__: call this to initialize the Twilio service, before instantiating any Textables
+
+- `TwilioConfig.port`        : `Number`, the port on which to temporarily run the server
+- `TwilioConfig.senderNumber`: `String`, the phone number associated with the twilio account, formatted like +12223334444
+- `TwilioConfig.accountSid`  : `String`, the account sid value taken from twilio
+- `TwilioConfig.authToken`   : `String`, the secret token given by twilio
 
 __`Textable`__
 
