@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/rapid-sensemaking-framework/rsf-textable.git"
+    "type": "git",
+    "url": "https://github.com/rapid-sensemaking-framework/rsf-textable.git"
   },
   "author": "",
   "license": "GPL-3.0",

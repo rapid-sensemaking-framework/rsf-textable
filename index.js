@@ -18,41 +18,55 @@ module.exports.TYPE_KEY = TYPE_KEY
 let senderNumber
 
 // global vars needed within the class as well
-let eventBus, client
+let eventBus, client, server
 
 const init = (config) => {
-    const { port, accountSid, authToken } = config
-    
-    const app = express()
-    app.use(bodyParser.urlencoded({ extended: false }))
-    
-    senderNumber = config.senderNumber
+    console.log('initializing rsf-textable')
+    return new Promise((resolve, reject) => {
+        const { port, accountSid, authToken } = config
+        
+        app = express()
+        app.use(bodyParser.urlencoded({ extended: false }))
+        
+        senderNumber = config.senderNumber
 
-    // a singleton that will act to transmit events between the webhook listener
-    // and the instances of Textable
-    eventBus = new EventEmitter()
+        // a singleton that will act to transmit events between the webhook listener
+        // and the instances of Textable
+        eventBus = new EventEmitter()
 
-    // listen for messages
-    app.post('/sms', (req, res) => {
-        // send back an empty response
-        res.writeHead(200, { 'Content-Type': 'text/xml' })
-        res.end(new MessagingResponse().toString())
+        // listen for messages
+        app.post('/sms', (req, res) => {
+            // send back an empty response
+            res.writeHead(200, { 'Content-Type': 'text/xml' })
+            res.end(new MessagingResponse().toString())
 
-        // use the ID/phone number as the event type, and the
-        // text as the event message
-        // req.body.From is the phone number
-        // req.body.Body is the text
-        eventBus.emit(req.body.From, req.body.Body)
+            // use the ID/phone number as the event type, and the
+            // text as the event message
+            // req.body.From is the phone number
+            // req.body.Body is the text
+            eventBus.emit(req.body.From, req.body.Body)
+        })
+
+        server = http.createServer(app).listen(port, () => {
+            console.log('starting http server to listen for text messages on port ' + port)
+            resolve()
+        })
+
+        // the service that will be used to make requests to the twilio api
+        client = twilio(accountSid, authToken)
     })
-
-    http.createServer(app).listen(port, () => {
-        console.log('starting http server to listen for text messages on port ' + port)
-    })
-
-    // the service that will be used to make requests to the twilio api
-    client = twilio(accountSid, authToken)
 }
 module.exports.init = init
+
+const shutdown = async () => {
+    console.log('shutting down rsf-textable')
+    server.close()
+    eventBus.removeAllListeners()
+    eventBus = null
+    client = null
+    server = null
+}
+module.exports.shutdown = shutdown
 
 class Textable extends EventEmitter {
     constructor(id, name) {
