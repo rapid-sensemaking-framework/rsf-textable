@@ -11,32 +11,27 @@ This is all explained here: https://www.twilio.com/docs/sms/quickstart/node#sign
 ## Installation
 `npm install --save rsf-textable`
 
-## API
+## Usage
 
-__`init(config: TwilioConfig) -> result: null`__: call this to initialize the Twilio service, before instantiating any Textables
+You must be running an instance of [rsf-twilio-bot](https://github.com/rapid-sensemaking-framework/rsf-twilio-bot) to connect to via websockets in order for the following to work.
 
-- `TwilioConfig.port`        : `Number`, the port on which to temporarily run the server
-- `TwilioConfig.senderNumber`: `String`, the phone number associated with the twilio account, formatted like +12223334444
-- `TwilioConfig.accountSid`  : `String`, the account sid value taken from twilio
-- `TwilioConfig.authToken`   : `String`, the secret token given by twilio
+```javascript
+const { init, shutdown, Textable } = require('rsf-textable')
 
-__`Textable`__
+const config = {
+  socketUrl: 'ws://localhost:3022'
+}
+init(config).then(() => {
+  const person = new Textable('+12223334444')
+  // log anything that we hear from them
+  person.listen(console.log)
+  person.speak('hello!')
 
-`constructor(id, name)`: A Textable is a wrapped version of a bidirectional communication channel between the program, and a person, in which messages of text/strings can be sent and received
+  // after 5 seconds, shutdown/disconnect
+  // person methods will no longer work, or be fired
+  setTimeout(() => {
+    shutdown()
+  }, 5000)
+})
 
-`id`: `String`, the phone number to reach this person at
-
-`name`: `String`, optional, a name of the person being contacted
-
-### __Instance methods__
-___
-
-`speak(string)`: Contact the person represented by the Textable, sending them a message
-
-`string`: `String`, the string of text to send the person represented
-
-___
-
-`listen(callback)`: Handle a message from the person represented by the Textable, received as a simple string
-
-`callback(string)`: `Function`, give a function which will be called whenever a message from the person is received
+```

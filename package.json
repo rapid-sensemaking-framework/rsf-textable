@@ -4,7 +4,8 @@
   "description": "a module for exposing a very super simple API for sending/receiving texts as an eventemitter",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --build",
+    "build-watch": "tsc --build --watch"
   },
   "repository": {
     "type": "git",
@@ -13,8 +14,12 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
+    "@types/socket.io-client": "^1.4.32",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "rsf-twilio-bot": "0.0.11",
+    "rsf-types": "0.0.26",
+    "socket.io-client": "^2.3.0",
     "twilio": "^3.30.1"
   }
 }
