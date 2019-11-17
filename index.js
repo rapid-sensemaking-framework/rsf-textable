@@ -58,7 +58,7 @@ var STANDARD_EVENT_KEY = 'msg';
 exports.STANDARD_EVENT_KEY = STANDARD_EVENT_KEY;
 // export a var which will be used to determine whether to use Mattermostable
 // as their mode of contact
-var TYPE_KEY = 'phone';
+var TYPE_KEY = 'sms';
 exports.TYPE_KEY = TYPE_KEY;
 var socket;
 var eventBus;

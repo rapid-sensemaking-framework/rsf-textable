@@ -11,7 +11,7 @@ const STANDARD_EVENT_KEY = 'msg'
 
 // export a var which will be used to determine whether to use Mattermostable
 // as their mode of contact
-const TYPE_KEY = 'phone'
+const TYPE_KEY = 'sms'
 
 let socket: SocketIOClient.Socket
 let eventBus: EventEmitter
