@@ -68,7 +68,7 @@ var init = function (twilioConfig) { return __awaiter(void 0, void 0, void 0, fu
         switch (_a.label) {
             case 0:
                 socketUrl = twilioConfig.socketUrl, socketSecret = twilioConfig.socketSecret;
-                console.log('initializing rsf-textable');
+                console.log('initializing rsf-smsable');
                 // a singleton that will act to transmit events between the webhook listener
                 // and the instances of Telegramable
                 eventBus = new events_1.EventEmitter();
@@ -88,7 +88,7 @@ var init = function (twilioConfig) { return __awaiter(void 0, void 0, void 0, fu
 exports.init = init;
 var shutdown = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        console.log('shutting down rsf-textable');
+        console.log('shutting down rsf-smsable');
         socket.disconnect();
         socket.removeAllListeners();
         eventBus.removeAllListeners();

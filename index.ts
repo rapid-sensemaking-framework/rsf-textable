@@ -19,7 +19,7 @@ let eventBus: EventEmitter
 const init = async (twilioConfig: ContactableProxyConfig) => {
   // TODO: set up auth challenge with socketSecret
   const { socketUrl, socketSecret } = twilioConfig
-  console.log('initializing rsf-textable')
+  console.log('initializing rsf-smsable')
 
   // a singleton that will act to transmit events between the webhook listener
   // and the instances of Telegramable
@@ -34,7 +34,7 @@ const init = async (twilioConfig: ContactableProxyConfig) => {
 }
 
 const shutdown = async () => {
-  console.log('shutting down rsf-textable')
+  console.log('shutting down rsf-smsable')
   socket.disconnect()
   socket.removeAllListeners()
   eventBus.removeAllListeners()

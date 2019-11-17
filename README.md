@@ -1,4 +1,4 @@
-# rsf-textable
+# rsf-smsable
 
 A class that can send and receive text messages via twilio,
 that has a clean and simple speak/listen API.
@@ -9,14 +9,14 @@ It is possible to do free of charge testing with Twilio, it just appends a littl
 This is all explained here: https://www.twilio.com/docs/sms/quickstart/node#sign-up-for-twilio-and-get-a-twilio-phone-number
 
 ## Installation
-`npm install --save rsf-textable`
+`npm install --save rsf-smsable`
 
 ## Usage
 
 You must be running an instance of [rsf-twilio-bot](https://github.com/rapid-sensemaking-framework/rsf-twilio-bot) to connect to via websockets in order for the following to work.
 
 ```javascript
-const { init, shutdown, Textable } = require('rsf-textable')
+const { init, shutdown, Textable } = require('rsf-smsable')
 
 const config = {
   socketUrl: 'ws://localhost:3022'
