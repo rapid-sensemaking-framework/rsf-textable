@@ -1,6 +1,6 @@
 {
   "name": "rsf-smsable",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "a module for exposing a very super simple API for sending/receiving texts as an eventemitter",
   "main": "index.js",
   "scripts": {
