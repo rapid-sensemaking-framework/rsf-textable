@@ -1,6 +1,8 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
 import { ContactableProxyConfig } from 'rsf-types';
+declare const STANDARD_EVENT_KEY = "msg";
+declare const TYPE_KEY = "phone";
 declare const init: (twilioConfig: ContactableProxyConfig) => Promise<void>;
 declare const shutdown: () => Promise<void>;
 declare class Textable extends EventEmitter {
@@ -11,4 +13,4 @@ declare class Textable extends EventEmitter {
     listen(callback: (message: string) => void): void;
     stopListening(): void;
 }
-export { init, shutdown, Textable };
+export { init, shutdown, Textable, TYPE_KEY, STANDARD_EVENT_KEY };

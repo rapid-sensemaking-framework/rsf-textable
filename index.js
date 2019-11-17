@@ -55,11 +55,11 @@ var protocol_1 = require("rsf-twilio-bot/protocol");
 // this key will be also used by other classes that implement the "Contactable"
 // trait/contract
 var STANDARD_EVENT_KEY = 'msg';
-module.exports.STANDARD_EVENT_KEY = STANDARD_EVENT_KEY;
+exports.STANDARD_EVENT_KEY = STANDARD_EVENT_KEY;
 // export a var which will be used to determine whether to use Mattermostable
 // as their mode of contact
 var TYPE_KEY = 'phone';
-module.exports.TYPE_KEY = TYPE_KEY;
+exports.TYPE_KEY = TYPE_KEY;
 var socket;
 var eventBus;
 var init = function (twilioConfig) { return __awaiter(void 0, void 0, void 0, function () {
