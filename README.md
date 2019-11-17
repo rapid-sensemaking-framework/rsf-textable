@@ -16,13 +16,13 @@ This is all explained here: https://www.twilio.com/docs/sms/quickstart/node#sign
 You must be running an instance of [rsf-twilio-bot](https://github.com/rapid-sensemaking-framework/rsf-twilio-bot) to connect to via websockets in order for the following to work.
 
 ```javascript
-const { init, shutdown, Textable } = require('rsf-smsable')
+const { init, shutdown, Smsable } = require('rsf-smsable')
 
 const config = {
   socketUrl: 'ws://localhost:3022'
 }
 init(config).then(() => {
-  const person = new Textable('+12223334444')
+  const person = new Smsable('+12223334444')
   // log anything that we hear from them
   person.listen(console.log)
   person.speak('hello!')

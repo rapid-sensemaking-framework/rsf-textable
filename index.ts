@@ -42,7 +42,7 @@ const shutdown = async () => {
   eventBus = null
 }
 
-class Textable extends EventEmitter {
+class Smsable extends EventEmitter {
   id: string
   name: string
   constructor(id: string, name: string) {
@@ -86,7 +86,7 @@ class Textable extends EventEmitter {
 export {
   init,
   shutdown,
-  Textable,
+  Smsable,
   TYPE_KEY,
   STANDARD_EVENT_KEY
 }

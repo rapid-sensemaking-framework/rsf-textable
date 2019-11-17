@@ -98,9 +98,9 @@ var shutdown = function () { return __awaiter(void 0, void 0, void 0, function (
     });
 }); };
 exports.shutdown = shutdown;
-var Textable = /** @class */ (function (_super) {
-    __extends(Textable, _super);
-    function Textable(id, name) {
+var Smsable = /** @class */ (function (_super) {
+    __extends(Smsable, _super);
+    function Smsable(id, name) {
         var _this = _super.call(this) || this;
         if (!(socket && eventBus)) {
             throw new Error('init has not been called');
@@ -118,7 +118,7 @@ var Textable = /** @class */ (function (_super) {
     }
     // expose a function that conforms to the standard for Contactable
     // which can "reach" the person
-    Textable.prototype.speak = function (message) {
+    Smsable.prototype.speak = function (message) {
         return __awaiter(this, void 0, void 0, function () {
             var twilioMessage;
             return __generator(this, function (_a) {
@@ -131,15 +131,15 @@ var Textable = /** @class */ (function (_super) {
             });
         });
     };
-    Textable.prototype.listen = function (callback) {
+    Smsable.prototype.listen = function (callback) {
         // just set up the actual event listener
         // using the appropriate key,
         // but not bothering to expose it
         this.on(STANDARD_EVENT_KEY, callback);
     };
-    Textable.prototype.stopListening = function () {
+    Smsable.prototype.stopListening = function () {
         this.removeAllListeners();
     };
-    return Textable;
+    return Smsable;
 }(events_1.EventEmitter));
-exports.Textable = Textable;
+exports.Smsable = Smsable;
