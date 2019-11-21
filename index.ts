@@ -1,7 +1,7 @@
 import * as io from 'socket.io-client'
 import { EventEmitter } from 'events'
 import {
-  ContactableProxyConfig
+  ContactableProxyConfig, ContactableConfig
 } from 'rsf-types'
 import { SEND_MESSAGE, RECEIVE_MESSAGE, TwilioMessage } from 'rsf-twilio-bot/protocol'
 
@@ -80,6 +80,14 @@ class Smsable extends EventEmitter {
 
   stopListening () {
     this.removeAllListeners()
+  }
+
+  config (): ContactableConfig {
+    return {
+      type: TYPE_KEY,
+      id: this.id,
+      name: this.name
+    }
   }
 }
 

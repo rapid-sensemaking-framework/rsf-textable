@@ -140,6 +140,13 @@ var Smsable = /** @class */ (function (_super) {
     Smsable.prototype.stopListening = function () {
         this.removeAllListeners();
     };
+    Smsable.prototype.config = function () {
+        return {
+            type: TYPE_KEY,
+            id: this.id,
+            name: this.name
+        };
+    };
     return Smsable;
 }(events_1.EventEmitter));
 exports.Smsable = Smsable;
